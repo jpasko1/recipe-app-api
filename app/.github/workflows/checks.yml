@@ -1,6 +1,8 @@
 ---
 name: Checks
-on: [push] # git trigger, pushes
+
+on: 
+  - push # git trigger, pushes
 jobs:
   test-lint:  # Job id, can ref inside github actions
     name: Test and Lint
