@@ -1,9 +1,11 @@
 ---
 name: Checks
+
 on: 
   push: # git trigger, pushes
     branches:
       - main
+
 jobs:
   test-lint:  # Job id, can ref inside github actions
     name: Test and Lint
