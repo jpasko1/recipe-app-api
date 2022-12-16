@@ -119,7 +119,7 @@ class PublicUserApiTests(TestCase):
                 name='Test Name',
             )
             self.client = APIClient()
-            self.client.force_authenticte(user=self.user)
+            self.client.force_authenticate(user=self.user)
 
         def test_retrieve_profile_success(self):
             """Test getting profile of logged in user"""
@@ -131,14 +131,14 @@ class PublicUserApiTests(TestCase):
             })
 
         def test_post_me_not_allowed(self):
-            res = self.client.post(ME_URL)
+            res = self.client.post(ME_URL, {})
             self.assertEqual(res.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
         def test_update_user_profile(self):
             """Test updating the user profile for the authenticated user"""
             payload = {'name': 'Updated Name', 'password': 'newpassword123'}
-            res = self.client.post(ME_URL)
-
+            #res = self.client.post(ME_URL, payload)
+            res = self.client.patch(ME_URL, payload)
 
             self.user.refresh_from_db()
 
