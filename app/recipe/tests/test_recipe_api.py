@@ -58,7 +58,7 @@ class PrivateRecipeApiTests(TestCase):
     """Test authenticated API requests"""
     def setUp(self):
         self.client = APIClient()
-        self.user = create_user( email='user@example.com', password='test123')
+        self.user = create_user(email='user@example.com', password='test123')
         self.client.force_authenticate(self.user)
 
     def test_retrieve_recipes(self):
@@ -109,7 +109,7 @@ class PrivateRecipeApiTests(TestCase):
         res = self.client.post(RECIPES_URL, payload) # /api/recipes/recipe
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
         recipe = Recipe.objects.get(id=res.data['id'])
-        for k,v in payload.items():
+        for k, v in payload.items():
             self.assertEqual(getattr(recipe, k), v)
         self.assertEqual(recipe.user, self.user)
 
@@ -150,7 +150,7 @@ class PrivateRecipeApiTests(TestCase):
         res = self.client.put(url, payload)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         recipe.refresh_from_db()
-        for k,v in payload.items():
+        for k, v in payload.items():
             self.assertEqual(getattr(recipe, k), v)
         self.assertEqual(recipe.user, self.user)
 
